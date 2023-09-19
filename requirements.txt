@@ -1,0 +1,13 @@
+boto3==1.28.44
+chardet==5.2.0
+extra_streamlit_components==0.1.60
+pymongo==4.5.0
+python-dotenv==1.0.0
+bcrypt==4.0.1
+PyYAML==6.0.1
+PyYAML==6.0.1
+Requests==2.31.0
+streamlit==1.26.0
+stripe==6.5.0
+PyJWT=2.8.0
+openai==0.27.10
