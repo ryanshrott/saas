@@ -48,7 +48,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
     input1 = st.text_area('Enter your text to summarize here:')
     if input1 and input1 != '':
         response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-16k-0613",
+        model="gpt-3.5-turbo-0613",
         messages=[
                 {'role': 'system', 'content': f'You are a helpful assistant.'},
             {"role": "user", "content": f"Provide a summary of the following content: \n ```{input1}```"}
@@ -65,7 +65,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
         language = st.text_input('Enter the language you want to translate to:')
         if input2 and language and input1 != '' and language != '':
             response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo-16k-0613",
+            model="gpt-3.5-turbo-0613",
             messages=[
                     {'role': 'system', 'content': f'You are a helpful assistant.'},
                 {"role": "user", "content": f"Translate this text to the language {language}: ```...````: \n ```{input2}```"}
