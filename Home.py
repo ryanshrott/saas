@@ -36,6 +36,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
 
     api_key = st.text_input('Enter your OpenAI API key here:')
     os.environ["OPENAI_API_KEY"] = api_key
+    openai.api_key = os.environ["OPENAI_API_KEY"]
     # Check if the user's email is subscribed
     st.session_state['subscribed'] = is_email_subscribed(st.session_state['email'])
     
