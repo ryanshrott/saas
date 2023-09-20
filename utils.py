@@ -7,9 +7,6 @@ from email.mime.text import MIMEText
 import smtplib
 import requests
 load_dotenv()
-from sklearn.linear_model import LinearRegression
-from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
 import numpy as np
 os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
