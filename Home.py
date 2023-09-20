@@ -70,7 +70,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
             model="gpt-3.5-turbo-0613",
             messages=[
                     {'role': 'system', 'content': f'You are a helpful assistant.'},
-                {"role": "user", "content": f"Translate this text to the language {language}: ```...````: \n ```{input2}```"}
+                {"role": "user", "content": f"Translate the text below to the language {language}: \n INPUT: ```{input2}```"}
             ],
             temperature=0.0)
             st.write(response['choices'][0]['message']['content'])
