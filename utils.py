@@ -8,7 +8,6 @@ import smtplib
 import requests
 load_dotenv()
 import numpy as np
-os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
 def resend_verification(email):
     # Call FastAPI email verification service
