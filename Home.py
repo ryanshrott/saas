@@ -29,13 +29,14 @@ if 'verified' not in st.session_state:
 # Handle login if not authenticated and not verified
 if not st.session_state['authentication_status'] and not st.session_state['verified']:
     st.session_state['authenticator'].login('Login', 'main')
-
+if 'summarized_text' not in st.session_state:
+    st.session_state['summarized_text'] = ''
+if 'translation' not in st.session_state:
+    st.session_state['translation'] = ''
 # Handle actions for verified and authenticated users
 if st.session_state['verified'] and st.session_state["authentication_status"]:
     st.session_state['authenticator'].logout('Logout', 'sidebar', key='123')
 
-    api_key = st.text_input('Enter your OpenAI API key here:')
-    os.environ["OPENAI_API_KEY"] = api_key
     openai.api_key = os.environ["OPENAI_API_KEY"]
     # Check if the user's email is subscribed
     st.session_state['subscribed'] = is_email_subscribed(st.session_state['email'])
@@ -49,7 +50,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
     # Free Tool
     st.write('This tool is free to use!')
     input1 = st.text_area('Enter your text to summarize here:')
-    if input1 and input1 != '':
+    if st.button('Summarize') and input1 and input1 != '':
         response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0613",
         messages=[
@@ -57,16 +58,20 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
             {"role": "user", "content": f"Provide a summary of the following content: \n ```{input1}```"}
         ],
         temperature=0.0)
-        st.write(response['choices'][0]['message']['content'])
+        st.session_state['summarized_text'] = response['choices'][0]['message']['content']
+        
+    st.write(st.session_state['summarized_text'])
     # Subscription-only Tool
     st.write('Subscription Only Tool')
-    if not st.session_state.get('subscribed'):
-        webbrowser.open_new_tab(os.getenv('STRIPE_PAYMENT_URL'))
-    else:
-        st.write('Special tool only subscribers can use!')
-        input2 = st.text_area('Enter your text to translate here:')
-        language = st.text_input('Enter the language you want to translate to:')
-        if input2 and language and input1 != '' and language != '':
+
+    st.write('Special tool only subscribers can use!')
+    input2 = st.text_area('Enter your text to translate here:')
+    language = st.text_input('Enter the language you want to translate to:')
+    if st.button('Translate') and input2 and language and input2 != '' and language != '':
+        if not st.session_state.get('subscribed'):
+            st.error('Please subscribe to use this tool!')
+            webbrowser.open_new_tab(os.getenv('STRIPE_PAYMENT_URL'))
+        else:
             response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-0613",
             messages=[
@@ -74,7 +79,9 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
                 {"role": "user", "content": f"Translate the text below to the language {language}: \n INPUT: ```{input2}```"}
             ],
             temperature=0.0)
-            st.write(response['choices'][0]['message']['content'])
+            st.session_state['translation'] = response['choices'][0]['message']['content']
+    
+    st.write(st.session_state['translation'])
 
 # Handle actions for users with correct password but unverified email
 elif st.session_state["authentication_status"] == True:
