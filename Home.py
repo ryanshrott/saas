@@ -2,7 +2,6 @@ import streamlit as st
 import os
 from dotenv import load_dotenv
 load_dotenv('.env')
-print('START', os.getenv("MONGO_AUTH"), os.getenv('YOUR_EMAIL_PASS'))
 from mongo_auth import Authenticate
 from utils import *
 import webbrowser
@@ -21,7 +20,6 @@ st.markdown('# Your SaaS App')
 # Initialize the authenticator
 st.session_state['authenticator'] = Authenticate("coolcookiesd267", "keyd3214", 60)
 
-print('HEY', os.environ["MONGO_AUTH"], os.environ['YOUR_EMAIL_PASS'])
 # Set default session state values if not already set
 if 'authentication_status' not in st.session_state:
     st.session_state['authentication_status'] = None
@@ -55,14 +53,14 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
     st.write('This tool is free to use!')
     input1 = st.text_area('Enter your text to summarize here:')
     if st.button('Summarize') and input1 and input1 != '':
-        response = client.completions.create(
+        response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
                 {'role': 'system', 'content': f'You are a helpful assistant.'},
             {"role": "user", "content": f"Provide a summary of the following content: \n ```{input1}```"}
         ],
         temperature=0.0)
-        st.session_state['summarized_text'] = response['choices'][0]['message']['content']
+        st.session_state['summarized_text'] = response.choices[0].message.content
         
     st.write(st.session_state['summarized_text'])
     # Subscription-only Tool
@@ -77,14 +75,15 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
             st.link_button('Subscribe', os.getenv('STRIPE_PAYMENT_URL'))
             #webbrowser.open_new_tab()
         else:
-            response = client.completions.create(
+            response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                     {'role': 'system', 'content': f'You are a helpful assistant.'},
                 {"role": "user", "content": f"Translate the text below to the language {language}: \n INPUT: ```{input2}```"}
             ],
             temperature=0.0)
-            st.session_state['translation'] = response['choices'][0]['message']['content']
+            st.write(response)
+            st.session_state['translation'] = response.choices[0].message.content
     
     st.write(st.session_state['translation'])
 
