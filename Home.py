@@ -1,7 +1,9 @@
 import streamlit as st
-from mongo_auth import Authenticate
 import os
 from dotenv import load_dotenv
+load_dotenv('.env')
+print('START', os.getenv("MONGO_AUTH"), os.getenv('YOUR_EMAIL_PASS'))
+from mongo_auth import Authenticate
 from utils import *
 import webbrowser
 import numpy as np
@@ -12,14 +14,14 @@ import openai
 st.set_page_config(page_title="SaaS", page_icon=":house", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 # Load environment variables
-load_dotenv()
 
 # Display the main title
 st.markdown('# Your SaaS App')
 
 # Initialize the authenticator
-st.session_state['authenticator'] = Authenticate("coolcookies267", "key3214", 60)
+st.session_state['authenticator'] = Authenticate("coolcookiesd267", "keyd3214", 60)
 
+print('HEY', os.environ["MONGO_AUTH"], os.environ['YOUR_EMAIL_PASS'])
 # Set default session state values if not already set
 if 'authentication_status' not in st.session_state:
     st.session_state['authentication_status'] = None
@@ -38,6 +40,8 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
     st.session_state['authenticator'].logout('Logout', 'sidebar', key='123')
 
     openai.api_key = os.environ["OPENAI_API_KEY"]
+
+    client = openai.Client(api_key=os.environ["OPENAI_API_KEY"])
     # Check if the user's email is subscribed
     st.session_state['subscribed'] = is_email_subscribed(st.session_state['email'])
     
@@ -51,8 +55,8 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
     st.write('This tool is free to use!')
     input1 = st.text_area('Enter your text to summarize here:')
     if st.button('Summarize') and input1 and input1 != '':
-        response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-0613",
+        response = client.completions.create(
+        model="gpt-3.5-turbo",
         messages=[
                 {'role': 'system', 'content': f'You are a helpful assistant.'},
             {"role": "user", "content": f"Provide a summary of the following content: \n ```{input1}```"}
@@ -73,8 +77,8 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
             st.link_button('Subscribe', os.getenv('STRIPE_PAYMENT_URL'))
             #webbrowser.open_new_tab()
         else:
-            response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo-0613",
+            response = client.completions.create(
+            model="gpt-3.5-turbo",
             messages=[
                     {'role': 'system', 'content': f'You are a helpful assistant.'},
                 {"role": "user", "content": f"Translate the text below to the language {language}: \n INPUT: ```{input2}```"}
