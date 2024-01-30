@@ -11,3 +11,4 @@ streamlit==1.30
 stripe==6.5.0
 PyJWT==2.8.0
 openai==1.7.2
+httpx==0.24.1
