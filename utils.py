@@ -51,6 +51,7 @@ def reset_password():
             st.error(e)
 
 def send_email(subject, message, to_address):
+    """Send a plaintext transactional email through the configured SMTP account."""
     from_address = os.getenv("YOUR_EMAIL")
     password = os.getenv("YOUR_EMAIL_PASS")
     msg = MIMEMultipart()
