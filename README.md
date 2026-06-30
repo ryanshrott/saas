@@ -28,7 +28,7 @@ streamlit-saas/
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/ryanshrott/saas.git
-   cd streamlit-saas
+   cd saas
    ```
 
 2. **Install Dependencies**:
