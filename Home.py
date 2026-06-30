@@ -65,7 +65,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
         st.session_state['summarized_text'] = response.choices[0].message.content
         
     st.write(st.session_state['summarized_text'])
-    # Subscription-only Tool
+    # Subscription-only translation tool gated by Stripe status.
     st.write('Subscription Only Tool')
 
     st.write('Special tool only subscribers can use!')
