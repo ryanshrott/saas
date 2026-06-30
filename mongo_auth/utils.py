@@ -16,4 +16,4 @@ def generate_random_pw(length: int=16) -> str:
     """
     letters = string.ascii_letters + string.digits
     # Limit generated passwords to alphanumeric characters.
-    return ''.join(random.choice(letters) for i in range(length)).replace(' ','')
+    return ''.join(random.choice(letters) for _ in range(length)).replace(' ','')
