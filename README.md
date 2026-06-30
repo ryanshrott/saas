@@ -1,5 +1,5 @@
 ﻿
-## Streamlit SaaS App Tutorial
+## Streamlit AI SaaS App
 
 ## Full Course and Walkthrough
 https://www.udemy.com/course/build-a-generative-ai-micro-saas-app-with-python-streamlit/?referralCode=DB3859ED45D76E36A8AF
