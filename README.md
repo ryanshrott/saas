@@ -38,7 +38,7 @@ streamlit-saas/
    ```
 
 3. **Environment Variables**:
-   Update the `.env` file with the necessary credentials and API keys.
+   Copy `.env.example` to `.env`, then add the necessary credentials and API keys.
 
 4. **Run the Streamlit App**:
    ```bash
