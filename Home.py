@@ -40,6 +40,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
 
     openai.api_key = os.environ["OPENAI_API_KEY"]
 
+    # Create the OpenAI client only after authentication succeeds.
     client = openai.Client(api_key=os.environ["OPENAI_API_KEY"])
     # Check if the user's email is subscribed
     st.session_state['subscribed'] = is_email_subscribed(st.session_state['email'])
