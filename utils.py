@@ -10,6 +10,7 @@ load_dotenv()
 import numpy as np
 
 def resend_verification(email):
+    """Request a new verification email for a registered user."""
     # Call FastAPI email verification service
     verification_url = os.getenv("VERIFICATION_URL")
     data = {'email': email}
