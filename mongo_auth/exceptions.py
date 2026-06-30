@@ -1,3 +1,5 @@
+"""Custom exceptions used by the Mongo-backed authentication widgets."""
+
 class CredentialsError(Exception):
     """
     Exception raised for incorrect credentials.
