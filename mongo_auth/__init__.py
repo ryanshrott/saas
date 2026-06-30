@@ -1,3 +1,5 @@
+"""MongoDB authentication helpers for the Streamlit app."""
+
 import yaml
 import streamlit as st
 from yaml.loader import SafeLoader
