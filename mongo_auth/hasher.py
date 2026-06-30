@@ -3,6 +3,8 @@ import bcrypt
 class Hasher:
     """
     This class will hash plain text passwords.
+
+    The generated hashes are safe to store and compare with bcrypt.
     """
     def __init__(self, passwords: list):
         """
