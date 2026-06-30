@@ -8,6 +8,7 @@ import stripe
 load_dotenv(".env")
 
 st.title('Account Settings')
+# Configure Stripe once for subscription management actions.
 stripe.api_key = os.getenv("STRIPE_API_KEY")
 
 def update_user_details():
