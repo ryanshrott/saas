@@ -22,6 +22,7 @@ def resend_verification(email):
 
 
 def is_email_subscribed(email):
+    """Return True when Stripe has an active subscription for the email."""
     # Initialize the Stripe API with the given key
     stripe.api_key = os.getenv("STRIPE_API_KEY")
 
