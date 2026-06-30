@@ -30,6 +30,7 @@ name, authentication_status, username = st.session_state['authenticator'].login(
 
 # Define function to cancel subscriptions based on email
 def cancel_subscriptions(email):
+    """Cancel every Stripe subscription linked to the supplied email."""
     try:
         # List customers by email
         customers = stripe.Customer.list(email=email, limit=100)
