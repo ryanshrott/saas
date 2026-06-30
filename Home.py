@@ -51,7 +51,7 @@ if st.session_state['verified'] and st.session_state["authentication_status"]:
     else:
         st.write('You are not subscribed!')
 
-    # Free Tool
+    # Free summarization tool available to authenticated users.
     st.write('This tool is free to use!')
     input1 = st.text_area('Enter your text to summarize here:')
     if st.button('Summarize') and input1 and input1 != '':
