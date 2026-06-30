@@ -47,6 +47,8 @@ streamlit-saas/
 
 ### Features
 
+The app keeps free and subscription-only tools separate so billing checks stay easy to follow.
+
 - **User Authentication**: The application integrates with MongoDB to authenticate users. New users can register, while existing users can log in.
 
 - **Text Summarization Tool**: After logging in, users can use a text summarization tool, which leverages OpenAI's GPT-3.5 model to provide summaries of the provided text.
